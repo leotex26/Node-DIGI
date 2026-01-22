@@ -1,5 +1,7 @@
 const { Course, Category } = require("../association/association");
-const { Op } = require("sequelize");
+const { Op, QueryTypes} = require("sequelize");
+const { sequelize } = require("../config/db");
+
 
 
 
@@ -101,14 +103,22 @@ const service = {
             }
         })
     },
-    totalOfCoursesPerCat: async ()=>{
-         const results = await sequelize.query(
-            "SELECT cat.name as categorie, count(c.id) as number_of_courses FROM courses c JOIN categories cat ON c.categoryId = cat.id GROUP BY categorie",
-            {
-              type: sequelize.QueryTypes.SELECT
-            }
-        );
-        return results;    
+    totalOfCoursesPerCat: async () => {
+        try {
+            console.log("Avant");
+    
+            const results = await sequelize.query(
+                "SELECT cat.name AS categorie, COUNT(c.id) AS number_of_courses FROM courses c JOIN categories cat ON c.categoryId = cat.id GROUP BY cat.name",
+                { type: QueryTypes.SELECT }
+            );
+    
+            console.log("Après");
+            return results;
+    
+        } catch (err) {
+            console.error("ERREUR SQL :", err);
+            throw err;
+        }
     }
 }
 

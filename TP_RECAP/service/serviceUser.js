@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../model/User")
 const jwt = require("jsonwebtoken");
+const { sequelize } = require("../config/db");
 
 const salt = 10
 
