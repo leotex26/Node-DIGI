@@ -7,7 +7,9 @@
  *   - le mot clé "function" est interdit
  */
 
-const arrow1 =
+const arrow1 = (e) => {
+    return e+1
+} 
 
 
 /**
@@ -19,7 +21,7 @@ const arrow1 =
  *   - le mot clé "return" est interdit
  */
 
-const arrow2 =
+const arrow2 = (e) => e+1
 
 
 module.exports = {arrow1, arrow2}; // Ici le nom des fonctions à utiliser dans l'ordre
